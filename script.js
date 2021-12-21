@@ -3,12 +3,13 @@ const todoItems = document.getElementById("todoItems");
 const checkTodo = document.getElementById('checkTodo');
 const body = document.querySelector('body');
 var todos = [];
+localStorage.setItem('notes', JSON.stringify(todos))
 
 // fetch notes from Storage if avaialable
 window.onload = async () => {
     let fetchTodos = await localStorage.getItem('notes');
     todos = JSON.parse(fetchTodos);
-    if (!todos) {
+    if (todos.length === 0) {
         todoItems.appendChild(createMsg());
     } else {
         renderNotes();
