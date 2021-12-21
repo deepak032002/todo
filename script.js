@@ -8,7 +8,7 @@ var todos = [];
 window.onload = async () => {
     let fetchTodos = await localStorage.getItem('notes');
     todos = JSON.parse(fetchTodos);
-    if (todos.length === 0) {
+    if (!todos) {
         todoItems.appendChild(createMsg());
     } else {
         renderNotes();
