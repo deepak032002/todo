@@ -21,11 +21,14 @@ body {
 .todoListBox {
   width: 40rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  height: 98vh;
 }
 
 .todoItems {
   margin-top: 5px;
+  height: 78vh;
+  padding: 0px 10px;
+  overflow: scroll;
 }
 
 .todoItem {
@@ -35,8 +38,8 @@ body {
   padding: 10px 0;
   font-size: 1.5rem;
   cursor: pointer;
-  animation: todoAnimate 1 ease-in-out .2s;
-  transition: 0.s;
+  animation: todoAnimate 1 ease-in-out 0.2s;
+  transition: 0s;
 }
 
 @keyframes todoAnimate {
@@ -75,4 +78,24 @@ body {
     rgba(105, 0, 255, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff00bf",endColorstr="#6900ff",GradientType=1);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

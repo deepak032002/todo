@@ -3,13 +3,12 @@ const todoItems = document.getElementById("todoItems");
 const checkTodo = document.getElementById('checkTodo');
 const body = document.querySelector('body');
 var todos = [];
-localStorage.setItem('notes', JSON.stringify(todos))
 
-// fetch notes from Storage if avaialable
+
 window.onload = async () => {
     let fetchTodos = await localStorage.getItem('notes');
     todos = JSON.parse(fetchTodos);
-    if (todos.length === 0) {
+    if (!todos) {
         todoItems.appendChild(createMsg());
     } else {
         renderNotes();
@@ -24,7 +23,7 @@ const renderNotes = () => {
         myDiv.id = data.date;
         myDiv.innerHTML = `${data.item}
             <div class="btnGroup d-inline float-right mx-2">
-                    <i class="fa fa-times mx-1" onclick="deleteNotes(${data.date})"></i>
+                    <i class="fa fa-times mx-3" onclick="deleteNotes(${data.date})"></i>
                     <i class="fa fa-pencil" data-toggle="modal" data-target="#myModal${data.date}"></i>
             </div>
         `;
@@ -45,7 +44,7 @@ const createNote = () => {
     const myDiv = document.createElement('div');
     myDiv.innerHTML = `${note.value}
             <div class="btnGroup d-inline float-right mx-2">
-                    <i class="fa fa-times mx-1" onclick="deleteNotes(${date})"></i>
+                    <i class="fa fa-times mx-3" onclick="deleteNotes(${date})"></i>
                     <i class="fa fa-pencil" data-toggle="modal" data-target="#myModal${date}"></i>
             </div>
         `;
@@ -58,10 +57,15 @@ const createNote = () => {
         date: date
     }
 
+    if (!todos) {
+        todos = [];
+    }
     todos.push(obj);
     myDiv.classList.add('todoItem', 'itemShadow');
     localStorage.setItem('notes', JSON.stringify(todos))
     note.value = "";
+
+
     todoItems.appendChild(myDiv);
 }
 
@@ -74,6 +78,7 @@ const deleteNotes = (arg) => {
             todos.splice(i, 1)
             localStorage.setItem('notes', JSON.stringify(todos))
             if (todos.length === 0) {
+                localStorage.removeItem('notes')
                 todoItems.appendChild(createMsg());
             }
             break;
